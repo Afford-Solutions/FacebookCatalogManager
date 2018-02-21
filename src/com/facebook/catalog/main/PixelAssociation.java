@@ -59,17 +59,17 @@ public class PixelAssociation extends HttpServlet {
 						}
 					}
 					else{
-						out.println(new JSONObject().put("success", false).put("association_id", "NA").put("message", "SOMETHING WENT WRONG (BAD RESPONSE). PLEASE TRY AGAIN."));
+						out.println(new JSONObject().put("success", false).put("message", "SOMETHING WENT WRONG (BAD RESPONSE). PLEASE TRY AGAIN."));
 					}
 					
 				}
 				else{
-					out.println(new JSONObject().put("success", false).put("association_id", "N/A").put("message", "SOMETHING WENT WRONG (BAD RESPONSE). PLEASE TRY AGAIN."));
+					out.println(new JSONObject().put("success", false).put("message", "SOMETHING WENT WRONG (BAD RESPONSE). PLEASE TRY AGAIN."));
 				}
 				
 			}
 			else{
-				out.println(new JSONObject().put("success", false).put("association_id", "NA").put("message", "ONE OR MORE MANDATORY FIELDS ARE MISSING. PLEASE VERIFY YOUR REQUEST AGAIN."));
+				out.println(new JSONObject().put("success", false).put("message", "ONE OR MORE MANDATORY FIELDS ARE MISSING. PLEASE VERIFY YOUR REQUEST AGAIN."));
 			}
 		
 		}catch(Exception e){
@@ -77,7 +77,6 @@ public class PixelAssociation extends HttpServlet {
 			out.println(
 					new JSONObject()
 					.put("success", false)
-					.put("association_id", "NA")
 					.put("message", "SOMETHING WENT WRONG. PLEASE CONTACT US WITH THIS STRING. EXCEPTION : " + e)
 			);
 			

@@ -48,16 +48,14 @@ public class PixelAssociationRequest {
 				
 				JSONObject responseObj = new JSONObject(result.toString());
 				
-				if(responseObj.has("id")){
+				if(responseObj.has("success") && responseObj.getBoolean("success")){
 					return new JSONObject()
 							.put("success", true)
-							.put("association_id", responseObj.getString("id"))
 							.put("message", "PRODUCT CATALOGUE IS SUCCESSFULLY LINKED TO THE PIXEL." + result.toString());
 				}
 				else{
 					return new JSONObject()
 							.put("success", false)
-							.put("catalog_id", "NA")
 							.put("message", "SOMETHING WENT WRONG. PLEASE CONTACT US WITH THIS STRING : " + result.toString());
 				}
 				
@@ -65,7 +63,6 @@ public class PixelAssociationRequest {
 			else{
 				return new JSONObject()
 						.put("success", false)
-						.put("catalog_id", "NA")
 						.put("message", "SOMETHING WENT WRONG. PLEASE CONTACT US WITH THIS STRING : " + result.toString());
 			}
 	
