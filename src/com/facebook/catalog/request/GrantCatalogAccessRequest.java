@@ -54,28 +54,35 @@ public class GrantCatalogAccessRequest {
 					
 					return new JSONObject()
 							.put("success", true)
-							.put("message", "PRODUCT CATALOGUE ACCESS GRANTED SUCCESSFULLY.");
+							.put("message", "PRODUCT CATALOGUE ACCESS GRANTED SUCCESSFULLY.")
+							.put("error_code", "");
 					
 				}
 				else{
 					return new JSONObject()
 							.put("success", false)
-							.put("message", "ERROR IN GRANTING PRODUCT CATALOGUE ACCESS. EXCEPTION : " + buffer.toString());
+							.put("message", "ERROR IN GRANTING PRODUCT CATALOGUE ACCESS. EXCEPTION : " + buffer.toString())
+							.put("error_code", String.valueOf(response.getStatusLine().getStatusCode()));
 				}
 					
 			}
 			
 			else{
+				
+				JSONObject responseObj = new JSONObject(buffer.toString());
+				
 				return new JSONObject()
 						.put("success", false)
-						.put("message", "SOMETHING WENT WRONG. PLEASE CONTACT THE SUPPORT TEAM. MESSAGE : " + buffer.toString());
+						.put("message", responseObj.getJSONObject("error").getString("message"))
+						.put("error_code", String.valueOf(responseObj.getJSONObject("error").getInt("code")));
 			}
 				
 		}
 		catch(Exception e) {
 			return new JSONObject()
 					.put("success", false)
-					.put("message", "SOMETHING WENT WRONG. PLEASE CONTACT THE SUPPORT TEAM. MESSAGE : " + e.getMessage());
+					.put("message", "SOMETHING WENT WRONG. PLEASE CONTACT THE SUPPORT TEAM. MESSAGE : " + e.getMessage())
+					.put("error_code", "505");
 		}
 		
 	}

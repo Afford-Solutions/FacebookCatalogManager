@@ -67,21 +67,27 @@ public class FeedCreatorRequest {
 					return new JSONObject()
 							.put("success", true)
 							.put("feed_id", responseObj.getString("id"))
-							.put("message", "PRODUCT CATALOGUE FEED IS SUCCESSFULLY CREATED." + result.toString());
+							.put("message", "PRODUCT CATALOGUE FEED IS SUCCESSFULLY CREATED.")
+							.put("error_code", "");
 				}
 				else{
 					return new JSONObject()
 							.put("success", false)
 							.put("feed_id", "NA")
-							.put("message", "SOMETHING WENT WRONG. PLEASE CONTACT US WITH THIS STRING : " + result.toString());
+							.put("message", "SOMETHING WENT WRONG. PLEASE CONTACT US WITH THIS STRING : " + result.toString())
+							.put("error_code", String.valueOf(responseFacebook.getStatusLine().getStatusCode()));
 				}
 				
 			}
 			else{
+				
+				JSONObject responseObj = new JSONObject(result.toString());
+				
 				return new JSONObject()
 						.put("success", false)
 						.put("feed_id", "NA")
-						.put("message", "SOMETHING WENT WRONG. PLEASE CONTACT US WITH THIS STRING : " + result.toString());
+						.put("message", responseObj.getJSONObject("error").getString("message"))
+						.put("error_code", String.valueOf(responseObj.getJSONObject("error").getInt("code")));
 			}
 	
 	}

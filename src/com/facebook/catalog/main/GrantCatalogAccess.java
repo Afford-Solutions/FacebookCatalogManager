@@ -48,7 +48,8 @@ public class GrantCatalogAccess extends HttpServlet {
 
 					out.println(new JSONObject()
 							.put("success", false)
-							.put("message", "SOMETHING WENT WRONG. INVALID RESPONSE STRING. MESSAGE : " + responseStatus.toString()));
+							.put("message", "SOMETHING WENT WRONG. INVALID RESPONSE STRING. MESSAGE : " + responseStatus.toString())
+							.put("error_code", "501"));
 				
 				}
 				
@@ -58,7 +59,8 @@ public class GrantCatalogAccess extends HttpServlet {
 
 				out.println(new JSONObject()
 						.put("success", false)
-						.put("message", "ONE OR MORE PARAMETERS ARE MISSING IN THE REQUEST (BAD REQUEST)."));
+						.put("message", "ONE OR MORE PARAMETERS ARE MISSING IN THE REQUEST (BAD REQUEST).")
+						.put("error_code", "502"));
 			
 			}
 			
@@ -68,7 +70,8 @@ public class GrantCatalogAccess extends HttpServlet {
 		
 			out.println(new JSONObject()
 					.put("success", false)
-					.put("message", "SOMETHING WENT WRONG. PLEASE CONTACT SUPPORT TEAM. EXCEPTION : " + e.toString()));
+					.put("message", "SOMETHING WENT WRONG. PLEASE CONTACT SUPPORT TEAM. EXCEPTION : " + e.toString())
+					.put("error_code", "503"));
 		
 		}
 		

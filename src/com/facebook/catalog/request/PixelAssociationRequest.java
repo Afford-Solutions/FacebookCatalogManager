@@ -51,19 +51,25 @@ public class PixelAssociationRequest {
 				if(responseObj.has("success") && responseObj.getBoolean("success")){
 					return new JSONObject()
 							.put("success", true)
-							.put("message", "PRODUCT CATALOGUE IS SUCCESSFULLY LINKED TO THE PIXEL." + result.toString());
+							.put("message", "PRODUCT CATALOGUE IS SUCCESSFULLY LINKED TO THE PIXEL." + result.toString())
+							.put("error_code", "");
 				}
 				else{
 					return new JSONObject()
 							.put("success", false)
-							.put("message", "SOMETHING WENT WRONG. PLEASE CONTACT US WITH THIS STRING : " + result.toString());
+							.put("message", "SOMETHING WENT WRONG. PLEASE CONTACT US WITH THIS STRING : " + result.toString())
+							.put("error_code", String.valueOf(responseFacebook.getStatusLine().getStatusCode()));
 				}
 				
 			}
 			else{
+				
+				JSONObject responseObj = new JSONObject(result.toString());
+				
 				return new JSONObject()
 						.put("success", false)
-						.put("message", "SOMETHING WENT WRONG. PLEASE CONTACT US WITH THIS STRING : " + result.toString());
+						.put("message", responseObj.getJSONObject("error").getString("message"))
+						.put("error_code", String.valueOf(responseObj.getJSONObject("error").getInt("code")));
 			}
 	
 	}
